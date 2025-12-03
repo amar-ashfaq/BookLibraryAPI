@@ -1,13 +1,13 @@
-﻿using BookLibraryAPI.DTOs;
+﻿using BookLibraryAPI.Entities;
 
 namespace BookLibraryAPI.Repositories
 {
     public interface IBookRepository
     {
-        List<BookReadDto> GetBooks();
-        BookReadDto GetBook(int id);
-        BookCreateDto AddBook(BookReadDto book);
-        BookUpdateDto UpdateBook(BookReadDto book);
+        List<Book> GetBooks();
+        Book GetBook(int id);
+        Book AddBook(Book book);
+        Book UpdateBook(int id, Book book);
         void DeleteBook(int id);
         void DeleteBooks();
     }
