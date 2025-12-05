@@ -1,4 +1,5 @@
 using BookLibraryAPI.Data;
+using BookLibraryAPI.Middleware;
 using BookLibraryAPI.Repositories;
 using BookLibraryAPI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseAuthorization();
 
