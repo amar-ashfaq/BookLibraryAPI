@@ -25,15 +25,8 @@ namespace BookLibraryAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult GetBook(int id) 
         {
-            try
-            {
-                var book = _bookService.GetBook(id);
-                return Ok(book);
-            }
-            catch (KeyNotFoundException) 
-            {
-                return NotFound();
-            }
+            var book = _bookService.GetBook(id);
+            return Ok(book);
         }
 
         [HttpPost]
@@ -45,40 +38,22 @@ namespace BookLibraryAPI.Controllers
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateBook(int id, BookUpdateDto bookDto) 
-        { 
-            try
-            {
-                await _bookService.UpdateBook(id, bookDto);
-                return NoContent();
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
-            catch (ArgumentNullException)
-            {
-                return BadRequest();
-            }
+        {    
+            await _bookService.UpdateBook(id, bookDto);
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteBook(int id) 
+        public async Task<IActionResult> DeleteBook(int id) 
         {
-            try
-            {
-                _bookService.DeleteBook(id);
-                return NoContent();
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }     
+            await _bookService.DeleteBook(id);
+            return NoContent();
         }
 
         [HttpDelete]
-        public IActionResult DeleteBooks()
+        public async Task<IActionResult> DeleteBooks()
         {
-            _bookService.DeleteBooks();
+            await _bookService.DeleteBooks();
             return NoContent(); 
         }
     }
