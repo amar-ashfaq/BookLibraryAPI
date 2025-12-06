@@ -9,9 +9,9 @@ namespace BookLibraryAPI.Services
     public class BookService : IBookService
     {
         private readonly IBookRepository bookRepository;
-        private readonly BookContext _context;
+        private readonly AppDbContext _context;
 
-        public BookService(IBookRepository bookRepository, BookContext context)
+        public BookService(IBookRepository bookRepository, AppDbContext context)
         {
             this.bookRepository = bookRepository;
             _context = context;
