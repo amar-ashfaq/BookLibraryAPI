@@ -6,5 +6,6 @@ namespace BookLibraryAPI.Repositories
     {
         List<User> GetUsers();
         User GetUser(int id);
+        User CreateUser(User user);
     }
 }
