@@ -1,7 +1,7 @@
 ﻿using BookLibraryAPI.Data;
 using BookLibraryAPI.Entities;
 
-namespace BookLibraryAPI.Repositories
+namespace BookLibraryAPI.Repositories.Books
 {
     public class BookRepository : IBookRepository
     {

@@ -1,7 +1,7 @@
-﻿using BookLibraryAPI.DTOs;
+﻿using BookLibraryAPI.DTOs.Auth;
 using BookLibraryAPI.Entities;
 
-namespace BookLibraryAPI.Services
+namespace BookLibraryAPI.Services.Users
 {
     public interface IUserService
     {

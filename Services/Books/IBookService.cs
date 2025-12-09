@@ -1,6 +1,6 @@
-﻿using BookLibraryAPI.DTOs;
+﻿using BookLibraryAPI.DTOs.Books;
 
-namespace BookLibraryAPI.Services
+namespace BookLibraryAPI.Services.Books
 {
     public interface IBookService
     {

@@ -1,4 +1,4 @@
-﻿namespace BookLibraryAPI.Services
+﻿namespace BookLibraryAPI.Services.Auth
 {
     public interface IPasswordService
     {

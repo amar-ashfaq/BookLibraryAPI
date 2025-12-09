@@ -1,7 +1,10 @@
 using BookLibraryAPI.Data;
 using BookLibraryAPI.Middleware;
-using BookLibraryAPI.Repositories;
-using BookLibraryAPI.Services;
+using BookLibraryAPI.Repositories.Books;
+using BookLibraryAPI.Repositories.Users;
+using BookLibraryAPI.Services.Auth;
+using BookLibraryAPI.Services.Books;
+using BookLibraryAPI.Services.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

@@ -1,11 +1,11 @@
 ﻿using BookLibraryAPI.Entities;
-using BookLibraryAPI.Repositories;
+using BookLibraryAPI.Repositories.Users;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace BookLibraryAPI.Services
+namespace BookLibraryAPI.Services.Auth
 {
     public class TokenService : ITokenService
     {

@@ -1,8 +1,8 @@
-﻿using BookLibraryAPI.DTOs;
+﻿using BookLibraryAPI.DTOs.Auth;
 using BookLibraryAPI.Entities;
-using BookLibraryAPI.Repositories;
+using BookLibraryAPI.Repositories.Users;
 
-namespace BookLibraryAPI.Services
+namespace BookLibraryAPI.Services.Auth
 {
     public class AuthService : IAuthService
     {

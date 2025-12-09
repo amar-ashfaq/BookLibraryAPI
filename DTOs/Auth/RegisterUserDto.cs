@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BookLibraryAPI.DTOs
+namespace BookLibraryAPI.DTOs.Auth
 {
     public class RegisterUserDto
     {

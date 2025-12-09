@@ -1,6 +1,7 @@
-﻿using BookLibraryAPI.DTOs;
+﻿using BookLibraryAPI.DTOs.Auth;
 using BookLibraryAPI.Entities;
-using BookLibraryAPI.Services;
+using BookLibraryAPI.Services.Auth;
+using BookLibraryAPI.Services.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;

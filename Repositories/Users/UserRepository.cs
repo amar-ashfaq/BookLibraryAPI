@@ -1,8 +1,8 @@
 ﻿using BookLibraryAPI.Data;
 using BookLibraryAPI.Entities;
-using BookLibraryAPI.Services;
+using BookLibraryAPI.Services.Auth;
 
-namespace BookLibraryAPI.Repositories
+namespace BookLibraryAPI.Repositories.Users
 {
     public class UserRepository : IUserRepository
     {

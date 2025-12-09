@@ -1,5 +1,5 @@
-﻿using BookLibraryAPI.DTOs;
-using BookLibraryAPI.Services;
+﻿using BookLibraryAPI.DTOs.Books;
+using BookLibraryAPI.Services.Books;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookLibraryAPI.Controllers

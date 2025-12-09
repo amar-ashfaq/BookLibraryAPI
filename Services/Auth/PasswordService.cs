@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace BookLibraryAPI.Services
+namespace BookLibraryAPI.Services.Auth
 {
     public class PasswordService : IPasswordService
     {

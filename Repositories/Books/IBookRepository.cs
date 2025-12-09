@@ -1,6 +1,6 @@
 ﻿using BookLibraryAPI.Entities;
 
-namespace BookLibraryAPI.Repositories
+namespace BookLibraryAPI.Repositories.Books
 {
     public interface IBookRepository
     {

@@ -1,6 +1,6 @@
 ﻿using BookLibraryAPI.Entities;
 
-namespace BookLibraryAPI.Repositories
+namespace BookLibraryAPI.Repositories.Users
 {
     public interface IUserRepository
     {

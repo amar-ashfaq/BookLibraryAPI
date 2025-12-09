@@ -1,10 +1,10 @@
 ﻿using BookLibraryAPI.Data;
-using BookLibraryAPI.DTOs;
+using BookLibraryAPI.DTOs.Books;
 using BookLibraryAPI.Entities;
-using BookLibraryAPI.Repositories;
+using BookLibraryAPI.Repositories.Books;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookLibraryAPI.Services
+namespace BookLibraryAPI.Services.Books
 {
     public class BookService : IBookService
     {

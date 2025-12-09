@@ -1,4 +1,4 @@
-﻿namespace BookLibraryAPI.DTOs
+﻿namespace BookLibraryAPI.DTOs.Auth
 {
     public class LoginRequestDto
     {
