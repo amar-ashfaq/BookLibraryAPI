@@ -6,8 +6,8 @@ namespace BookLibraryAPI.Repositories.Books
     {
         List<Book> GetBooks();
         Book GetBook(int id);
-        Book AddBook(Book book);
-        Book UpdateBook(int id, Book book);
+        void AddBook(Book book);
+        void UpdateBook();
         void DeleteBook(int id);
         void DeleteBooks();
     }

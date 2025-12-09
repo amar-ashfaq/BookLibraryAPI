@@ -29,58 +29,29 @@ namespace BookLibraryAPI.Repositories.Books
             return book;
         }
 
-        public Book AddBook(Book book)
+        public void AddBook(Book book)
         {
-            // can remove this check once service layer is done
-            if (book == null)
-            {
-                throw new ArgumentNullException("Book input is malformed or invalid");
-            }
-
             _context.Books.Add(book);
-
-            return book;
+            _context.SaveChanges();
         }
 
-        public Book UpdateBook(int id, Book book)
+        public void UpdateBook()
         {
-            var bookToUpdate = _context.Books.FirstOrDefault(x => x.Id == id);
+            _context.SaveChanges();
+        }
 
-            if (bookToUpdate == null)
-            {
-                throw new KeyNotFoundException($"Book with id {id} could not be found.");
-            }
-
-            // can remove this check once service layer is done
-            if (book == null)
-            {
-                throw new ArgumentNullException("Book input is malformed or invalid");
-            }
-
-            bookToUpdate.Title = book.Title;
-            bookToUpdate.Description = book.Description;
-            bookToUpdate.Author = book.Author;
-            bookToUpdate.Genre = book.Genre;
-            bookToUpdate.PublishedYear = book.PublishedYear;
-            bookToUpdate.IsAvailable = book.IsAvailable;
-
-            return bookToUpdate;
-        }                                                                 
         public void DeleteBook(int id)
         {
-            var book = _context.Books.FirstOrDefault(x => x.Id == id);
-                                                                   
-            if (book == null)
-            {
-                throw new KeyNotFoundException($"Book of id {id} could not be found.");
-            }
+            var book = GetBook(id);
 
             _context.Books.Remove(book);
+            _context.SaveChanges();
         }
 
         public void DeleteBooks()
         {
-            _context.Books.RemoveRange(_context.Books);                                                
+            _context.Books.RemoveRange(_context.Books);
+            _context.SaveChanges();
         }
     }
 }

@@ -30,31 +30,31 @@ namespace BookLibraryAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddBook(BookCreateDto bookDto)
+        public ActionResult AddBook(BookCreateDto bookDto)
         {
-            var created = await _bookService.AddBook(bookDto);
+            var created = _bookService.AddBook(bookDto);
             return CreatedAtAction(nameof(GetBook), new { id = created.Id }, created);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateBook(int id, BookUpdateDto bookDto) 
+        public IActionResult UpdateBook(int id, BookUpdateDto bookDto) 
         {    
-            await _bookService.UpdateBook(id, bookDto);
+            _bookService.UpdateBook(id, bookDto);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBook(int id) 
+        public IActionResult DeleteBook(int id) 
         {
-            await _bookService.DeleteBook(id);
+            _bookService.DeleteBook(id);
             return NoContent();
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteBooks()
+        public IActionResult DeleteBooks()
         {
-            await _bookService.DeleteBooks();
-            return NoContent(); 
+            _bookService.DeleteBooks();
+            return NoContent();
         }
     }
 }

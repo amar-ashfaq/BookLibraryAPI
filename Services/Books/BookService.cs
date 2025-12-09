@@ -1,5 +1,4 @@
-﻿using BookLibraryAPI.Data;
-using BookLibraryAPI.DTOs.Books;
+﻿using BookLibraryAPI.DTOs.Books;
 using BookLibraryAPI.Entities;
 using BookLibraryAPI.Repositories.Books;
 using Microsoft.EntityFrameworkCore;
@@ -9,12 +8,10 @@ namespace BookLibraryAPI.Services.Books
     public class BookService : IBookService
     {
         private readonly IBookRepository bookRepository;
-        private readonly AppDbContext _context;
 
-        public BookService(IBookRepository bookRepository, AppDbContext context)
+        public BookService(IBookRepository bookRepository)
         {
             this.bookRepository = bookRepository;
-            _context = context;
         }
 
         public List<BookReadDto> GetBooks()
@@ -51,7 +48,7 @@ namespace BookLibraryAPI.Services.Books
             };
         }
 
-        public async Task<BookReadDto> AddBook(BookCreateDto bookDto)
+        public BookReadDto AddBook(BookCreateDto bookDto)
         {
             ArgumentNullException.ThrowIfNull(bookDto);
 
@@ -66,7 +63,6 @@ namespace BookLibraryAPI.Services.Books
             };
 
             bookRepository.AddBook(book);
-            await _context.SaveChangesAsync();
 
             return new BookReadDto()
             {
@@ -80,7 +76,7 @@ namespace BookLibraryAPI.Services.Books
             };
         }
 
-        public async Task<BookReadDto> UpdateBook(int id, BookUpdateDto bookDto)
+        public BookReadDto UpdateBook(int id, BookUpdateDto bookDto)
         {
             ArgumentNullException.ThrowIfNull(bookDto);
 
@@ -93,9 +89,7 @@ namespace BookLibraryAPI.Services.Books
             book.PublishedYear = bookDto.PublishedYear;
             book.IsAvailable = bookDto.IsAvailable;
 
-            bookRepository.UpdateBook(id, book);
-
-            await _context.SaveChangesAsync();
+            bookRepository.UpdateBook();
             
             return new BookReadDto()
             {
@@ -109,16 +103,14 @@ namespace BookLibraryAPI.Services.Books
             };
         }
 
-        public async Task DeleteBook(int id)
+        public void DeleteBook(int id)
         {
             bookRepository.DeleteBook(id);
-            await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteBooks()
+        public void DeleteBooks()
         {
             bookRepository.DeleteBooks();
-            await _context.SaveChangesAsync();
         }
     }
 }
