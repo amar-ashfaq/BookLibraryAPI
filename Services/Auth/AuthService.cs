@@ -34,7 +34,7 @@ namespace BookLibraryAPI.Services.Auth
 
         public string LoginUser(LoginRequestDto loginRequestDto)
         {
-            var user = _userRepository.GetUsers().FirstOrDefault(x => x.Username == loginRequestDto.Username);
+            var user = _userRepository.GetUserByUsername(loginRequestDto.Username);
 
             if (user == null)
             {

@@ -6,6 +6,7 @@ namespace BookLibraryAPI.Repositories.Users
     {
         List<User> GetUsers();
         User GetUser(int id);
+        User GetUserByUsername(string username);
         User CreateUser(User user);
         void DeleteUser(int id);
         void DeleteUsers();

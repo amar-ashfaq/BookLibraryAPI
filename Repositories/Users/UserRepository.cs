@@ -32,13 +32,20 @@ namespace BookLibraryAPI.Repositories.Users
             return user;
         }
 
-        public User CreateUser(User user)
+        public User GetUserByUsername(string username)
         {
+            var user = _context.Users.FirstOrDefault(u => u.Username == username);
+
             if (user == null)
             {
-                throw new ArgumentNullException(); 
+                throw new KeyNotFoundException($"Username {username} could not be found");
             }
 
+            return user;
+        }
+
+        public User CreateUser(User user)
+        {
             var hash = _passwordService.HashPassword(user.PasswordHash, out var salt);
 
             user.PasswordHash = hash;
@@ -52,12 +59,7 @@ namespace BookLibraryAPI.Repositories.Users
 
         public void DeleteUser(int id) 
         { 
-            var user = _context.Users.FirstOrDefault(x => x.Id == id);
-
-            if (user == null)
-            {
-                throw new KeyNotFoundException($"User with Id {id} could not be found");
-            }
+            var user = GetUser(id);
 
             _context.Users.Remove(user);
             _context.SaveChanges();
@@ -66,6 +68,7 @@ namespace BookLibraryAPI.Repositories.Users
         public void DeleteUsers()
         {
             _context.Users.RemoveRange(_context.Users);
+            _context.SaveChanges();
         }
     }
 }
