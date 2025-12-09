@@ -45,9 +45,27 @@ namespace BookLibraryAPI.Repositories
             user.PasswordSalt = Convert.ToHexString(salt);
 
             _context.Users.Add(user);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return user;
+        }
+
+        public void DeleteUser(int id) 
+        { 
+            var user = _context.Users.FirstOrDefault(x => x.Id == id);
+
+            if (user == null)
+            {
+                throw new KeyNotFoundException($"User with Id {id} could not be found");
+            }
+
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+        }
+
+        public void DeleteUsers()
+        {
+            _context.Users.RemoveRange(_context.Users);
         }
     }
 }

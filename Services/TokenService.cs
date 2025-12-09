@@ -10,22 +10,20 @@ namespace BookLibraryAPI.Services
     public class TokenService : ITokenService
     {
         private readonly IConfiguration _config;
-        private readonly IUserRepository _userRepository;
 
         public TokenService(IConfiguration config, IUserRepository userRepository)
         {
             _config = config;
-            _userRepository = userRepository;
         }
 
         public string GenerateJwtToken(User user)
         {
             var claims = new List<Claim>()
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Username),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Role, user.Role ?? "User")
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Role, user.Role ?? "user"),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
 
             var jwtSection = _config.GetSection("Jwt");
