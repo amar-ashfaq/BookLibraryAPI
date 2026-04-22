@@ -1,5 +1,6 @@
 ﻿using BookLibraryAPI.Data;
 using BookLibraryAPI.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookLibraryAPI.Repositories.Books
 {
@@ -12,46 +13,37 @@ namespace BookLibraryAPI.Repositories.Books
             _context = context;
         }
 
-        public List<Book> GetBooks()
+        public async Task<List<Book>> GetBooks()
         {
-            return _context.Books.ToList();
+            return await _context.Books.ToListAsync();
         }
 
-        public Book GetBook(int id)
+        public async Task<Book> GetBook(int id)
         {
-            var book = _context.Books.FirstOrDefault(x => x.Id == id);
-
-            if (book == null)
-            {
-                throw new KeyNotFoundException($"Book with id {id} could not be found.");
-            }
-
-            return book;
+            return await _context.Books.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public void AddBook(Book book)
+        public async Task AddBook(Book book)
         {
             _context.Books.Add(book);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void UpdateBook()
+        public async Task UpdateBook()
         {
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteBook(int id)
+        public async Task DeleteBook(Book book)
         {
-            var book = GetBook(id);
-
             _context.Books.Remove(book);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void DeleteBooks()
+        public async Task DeleteBooks()
         {
             _context.Books.RemoveRange(_context.Books);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }
