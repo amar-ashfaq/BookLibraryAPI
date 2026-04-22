@@ -1,7 +1,6 @@
 ﻿using BookLibraryAPI.DTOs.Books;
 using BookLibraryAPI.Entities;
 using BookLibraryAPI.Repositories.Books;
-using Microsoft.EntityFrameworkCore;
 
 namespace BookLibraryAPI.Services.Books
 {
@@ -14,9 +13,9 @@ namespace BookLibraryAPI.Services.Books
             this.bookRepository = bookRepository;
         }
 
-        public List<BookReadDto> GetBooks()
+        public async Task<List<BookReadDto>> GetBooks()
         {
-            var books = bookRepository.GetBooks();
+            var books = await bookRepository.GetBooks();
 
             var bookDtos = books
                 .Select(book => new BookReadDto { 
@@ -32,9 +31,14 @@ namespace BookLibraryAPI.Services.Books
             return bookDtos;
         }
 
-        public BookReadDto GetBook(int id)
+        public async Task<BookReadDto> GetBook(int id)
         {
-            Book book = bookRepository.GetBook(id);
+            Book book = await bookRepository.GetBook(id);
+
+            if (book == null)
+            {
+                throw new KeyNotFoundException($"Book with id {id} could not be found.");
+            }
 
             return new BookReadDto()
             {
@@ -48,7 +52,7 @@ namespace BookLibraryAPI.Services.Books
             };
         }
 
-        public BookReadDto AddBook(BookCreateDto bookDto)
+        public async Task<BookReadDto> AddBook(BookCreateDto bookDto)
         {
             ArgumentNullException.ThrowIfNull(bookDto);
 
@@ -62,7 +66,7 @@ namespace BookLibraryAPI.Services.Books
                 IsAvailable = bookDto.IsAvailable
             };
 
-            bookRepository.AddBook(book);
+            await bookRepository.AddBook(book);
 
             return new BookReadDto()
             {
@@ -76,11 +80,16 @@ namespace BookLibraryAPI.Services.Books
             };
         }
 
-        public BookReadDto UpdateBook(int id, BookUpdateDto bookDto)
+        public async Task UpdateBook(int id, BookUpdateDto bookDto)
         {
             ArgumentNullException.ThrowIfNull(bookDto);
 
-            var book = bookRepository.GetBook(id);
+            var book = await bookRepository.GetBook(id);
+
+            if (book == null)
+            {
+                throw new KeyNotFoundException($"Book with id {id} could not be found.");
+            }
 
             book.Title = bookDto.Title;
             book.Description = bookDto.Description;
@@ -89,28 +98,24 @@ namespace BookLibraryAPI.Services.Books
             book.PublishedYear = bookDto.PublishedYear;
             book.IsAvailable = bookDto.IsAvailable;
 
-            bookRepository.UpdateBook();
-            
-            return new BookReadDto()
+            await bookRepository.UpdateBook();
+        }
+
+        public async Task DeleteBook(int id)
+        {
+            Book book = await bookRepository.GetBook(id);
+
+            if (book == null)
             {
-                Id = book.Id,
-                Title = book.Title,
-                Description = book.Description,
-                Author = book.Author,
-                Genre = book.Genre,
-                PublishedYear = book.PublishedYear,
-                IsAvailable = book.IsAvailable
-            };
+                throw new KeyNotFoundException($"Book with id {id} could not be found.");
+            }
+
+            await bookRepository.DeleteBook(book);
         }
 
-        public void DeleteBook(int id)
+        public async Task DeleteBooks()
         {
-            bookRepository.DeleteBook(id);
-        }
-
-        public void DeleteBooks()
-        {
-            bookRepository.DeleteBooks();
+            await bookRepository.DeleteBooks();
         }
     }
 }

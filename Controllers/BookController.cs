@@ -16,44 +16,44 @@ namespace BookLibraryAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<BookReadDto>> GetBooks()
+        public async Task<ActionResult<List<BookReadDto>>> GetBooks()
         {
-            var books = _bookService.GetBooks();
+            var books = await _bookService.GetBooks();
             return Ok(books);
         }
 
         [HttpGet("{id}")]
-        public ActionResult GetBook(int id) 
+        public async Task<ActionResult> GetBook(int id) 
         {
-            var book = _bookService.GetBook(id);
+            var book = await _bookService.GetBook(id);
             return Ok(book);
         }
 
         [HttpPost]
-        public ActionResult AddBook(BookCreateDto bookDto)
+        public async Task<ActionResult> AddBook(BookCreateDto bookDto)
         {
-            var created = _bookService.AddBook(bookDto);
+            var created = await _bookService.AddBook(bookDto);
             return CreatedAtAction(nameof(GetBook), new { id = created.Id }, created);
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateBook(int id, BookUpdateDto bookDto) 
+        public async Task<IActionResult> UpdateBook(int id, BookUpdateDto bookDto) 
         {    
-            _bookService.UpdateBook(id, bookDto);
+            await _bookService.UpdateBook(id, bookDto);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteBook(int id) 
+        public async Task<IActionResult> DeleteBook(int id) 
         {
-            _bookService.DeleteBook(id);
+            await _bookService.DeleteBook(id);
             return NoContent();
         }
 
         [HttpDelete]
-        public IActionResult DeleteBooks()
+        public async Task<IActionResult> DeleteBooks()
         {
-            _bookService.DeleteBooks();
+            await _bookService.DeleteBooks();
             return NoContent();
         }
     }

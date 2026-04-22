@@ -4,11 +4,11 @@ namespace BookLibraryAPI.Repositories.Books
 {
     public interface IBookRepository
     {
-        List<Book> GetBooks();
-        Book GetBook(int id);
-        void AddBook(Book book);
-        void UpdateBook();
-        void DeleteBook(int id);
-        void DeleteBooks();
+        Task<List<Book>> GetBooks();
+        Task<Book> GetBook(int id);
+        Task AddBook(Book book);
+        Task UpdateBook();
+        Task DeleteBook(Book book);
+        Task DeleteBooks();
     }
 }
