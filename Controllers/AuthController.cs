@@ -21,13 +21,6 @@ namespace BookLibraryAPI.Controllers
             _userService = userService;
         }
 
-        [HttpPost]
-        public IActionResult Register(RegisterUserDto registerUserDto)
-        {
-            var user = _authService.RegisterUser(registerUserDto);
-            return CreatedAtAction(nameof(GetProfile), new { user.Id }, user);
-        }
-
         [HttpPost("login")]
         [AllowAnonymous]
         public IActionResult Login(LoginRequestDto loginRequest)

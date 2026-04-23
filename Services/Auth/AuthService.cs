@@ -1,5 +1,4 @@
 ﻿using BookLibraryAPI.DTOs.Auth;
-using BookLibraryAPI.Entities;
 using BookLibraryAPI.Repositories.Users;
 
 namespace BookLibraryAPI.Services.Auth
@@ -15,21 +14,6 @@ namespace BookLibraryAPI.Services.Auth
             _userRepository = userRepository;
             _tokenService = tokenService;
             _passwordService = passwordService;
-        }
-
-        public User RegisterUser(RegisterUserDto registerUserDto)
-        {
-            ArgumentNullException.ThrowIfNull(registerUserDto);
-
-            var user = new User
-            {
-                Name = registerUserDto.Name,
-                Username = registerUserDto.Username,
-                PasswordHash = registerUserDto.Password,
-                Role = "user"
-            };
-
-            return _userRepository.CreateUser(user);
         }
 
         public string LoginUser(LoginRequestDto loginRequestDto)
