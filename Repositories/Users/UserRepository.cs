@@ -1,5 +1,6 @@
 ﻿using BookLibraryAPI.Data;
 using BookLibraryAPI.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookLibraryAPI.Repositories.Users
 {
@@ -13,13 +14,13 @@ namespace BookLibraryAPI.Repositories.Users
         }
         public List<User> GetUsers()
         {
-            var users = _context.Users.ToList();
+            var users = _context.Users.AsNoTracking().ToList();
             return users;
         }
 
         public User GetUser(int id)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Id == id);
+            var user = _context.Users.AsNoTracking().FirstOrDefault(u => u.Id == id);
 
             if (user == null)
             {
@@ -31,7 +32,7 @@ namespace BookLibraryAPI.Repositories.Users
 
         public User GetUserByUsername(string username)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Username == username);
+            var user = _context.Users.AsNoTracking().FirstOrDefault(u => u.Username == username);
 
             if (user == null)
             {

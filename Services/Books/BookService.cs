@@ -33,7 +33,7 @@ namespace BookLibraryAPI.Services.Books
 
         public async Task<BookReadDto> GetBook(int id)
         {
-            Book book = await bookRepository.GetBook(id);
+            Book book = await bookRepository.GetBookReadOnly(id);
 
             if (book == null)
             {
@@ -103,7 +103,7 @@ namespace BookLibraryAPI.Services.Books
 
         public async Task DeleteBook(int id)
         {
-            Book book = await bookRepository.GetBook(id);
+            Book book = await bookRepository.GetBookReadOnly(id);
 
             if (book == null)
             {

@@ -15,12 +15,17 @@ namespace BookLibraryAPI.Repositories.Books
 
         public async Task<List<Book>> GetBooks()
         {
-            return await _context.Books.ToListAsync();
+            return await _context.Books.AsNoTracking().ToListAsync();
         }
 
         public async Task<Book> GetBook(int id)
         {
             return await _context.Books.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<Book> GetBookReadOnly(int id)
+        {
+            return await _context.Books.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task AddBook(Book book)

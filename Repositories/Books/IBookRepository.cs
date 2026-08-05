@@ -6,6 +6,7 @@ namespace BookLibraryAPI.Repositories.Books
     {
         Task<List<Book>> GetBooks();
         Task<Book> GetBook(int id);
+        Task<Book> GetBookReadOnly(int id);
         Task AddBook(Book book);
         Task UpdateBook();
         Task DeleteBook(Book book);
